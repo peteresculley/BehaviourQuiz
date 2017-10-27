@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".QuizActivity">
+
+    <TextView
+        android:id="@+id/quizitem_title"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textColor="@color/colorTextQuiz"
+        android:textStyle="bold"
+        android:textSize="50dp"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/quizitem_progress"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:textColor="@color/colorTextQuiz"
+        android:textSize="15dp"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/quizitem_question"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/colorTextQuiz"
+        android:textStyle="bold"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/quizitem_answer1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/colorTextQuiz"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/quizitem_answer2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/colorTextQuiz"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/quizitem_answer3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/colorTextQuiz"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/quizitem_answer4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/colorTextQuiz"
+        android:textSize="20dp" />
+
+</LinearLayout>

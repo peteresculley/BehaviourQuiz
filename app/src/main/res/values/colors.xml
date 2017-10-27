@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorTextGroup">#FF000000</color>
+    <color name="colorTextItem">#FF000000</color>
+    <color name="colorTextQuiz">#FF000000</color>
+    <color name="colorBackgroundUnfinished">#770000FF</color>
+    <color name="colorBackgroundFinished">#77FF0000</color>
+    <color name="colorBackgroundBack">#33111111</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+</resources>
