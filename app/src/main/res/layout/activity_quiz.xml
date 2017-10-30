@@ -4,15 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".QuizActivity">
+    tools:context=".QuizActivity"
+    android:background="@color/colorBackgroundBack">
 
     <TextView
         android:id="@+id/quizitem_title"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="130dp"
         android:textColor="@color/colorTextQuiz"
         android:textStyle="bold"
-        android:textSize="50dp"
+        android:textSize="25dp"
         android:gravity="center_horizontal" />
 
     <TextView
@@ -29,34 +30,39 @@
         android:layout_height="50dp"
         android:textColor="@color/colorTextQuiz"
         android:textStyle="bold"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:paddingLeft="5dp" />
 
     <TextView
         android:id="@+id/quizitem_answer1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textColor="@color/colorTextQuiz"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:paddingLeft="5dp" />
 
     <TextView
         android:id="@+id/quizitem_answer2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textColor="@color/colorTextQuiz"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:paddingLeft="5dp" />
 
     <TextView
         android:id="@+id/quizitem_answer3"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textColor="@color/colorTextQuiz"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:paddingLeft="5dp" />
 
     <TextView
         android:id="@+id/quizitem_answer4"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textColor="@color/colorTextQuiz"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:paddingLeft="5dp" />
 
 </LinearLayout>

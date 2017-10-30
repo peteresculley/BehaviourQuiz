@@ -1,19 +1,20 @@
 package jack.behaviourquiz;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-public class GroupsActivity extends Activity {
+import static jack.behaviourquiz.MainActivity.TAG;
+
+public class GroupsActivity extends BaseActivity {
 
     private ListView ItemListView;
     private TextView TitleView;
@@ -21,6 +22,8 @@ public class GroupsActivity extends Activity {
     private List<String> items;
     private String GroupName;
     private int GroupNumber;
+    private boolean[] itemsFinished;
+    private PhaseAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +35,14 @@ public class GroupsActivity extends Activity {
         GroupName = groupInfo.getStringExtra(MainActivity.EXTRA_QUIZ_GROUP_NAME);
         GroupNumber = groupInfo.getIntExtra(MainActivity.EXTRA_QUIZ_GROUP_NUMBER, 0);
 
+        itemsFinished = new boolean[items.size()];
+
         TitleView = (TextView) findViewById(R.id.group_title);
         TitleView.setText(GroupName);
 
         ItemListView = (ListView) findViewById(R.id.group_list);
-        ItemListView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.list_items, items));
+        mAdapter = new PhaseAdapter(getApplicationContext(), R.layout.list_items, items, GroupNumber);
+        ItemListView.setAdapter(mAdapter);
         ItemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -46,5 +52,28 @@ public class GroupsActivity extends Activity {
                 startActivity(startQuiz);
             }
         });
+
+        updateFinishedItems();
+    }
+
+    @Override
+    protected void onResume() {
+        updateFinishedItems();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(TAG, "GroupsActivity Pause");
+        super.onPause();
+    }
+
+    private void updateFinishedItems() {
+        Log.d(TAG, "Update Items");
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        for(int i = 0; i < itemsFinished.length; i++) {
+            itemsFinished[i] = sharedPref.getBoolean(QuizResultActivity.getQuestionKey(GroupNumber, i), false);
+        }
+        mAdapter.notifyDataSetChanged();
     }
 }

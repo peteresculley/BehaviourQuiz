@@ -3,7 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
-    android:textSize="30dp"
-    android:textColor="@color/colorTextItem">
+    android:layout_marginHorizontal="5dp"
+    android:textSize="20dp"
+    android:minHeight="50dp"
+    android:paddingLeft="5dp"
+    android:gravity="center_vertical"
+    android:textColor="@color/colorTextItem"
+    android:id="@+id/list_items_text">
 
 </TextView>

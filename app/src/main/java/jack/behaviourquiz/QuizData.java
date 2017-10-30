@@ -40,4 +40,5 @@ class QuizQuestion {
 
     public String correctAnswer;
     public String question;
+    public String explanation;
 }

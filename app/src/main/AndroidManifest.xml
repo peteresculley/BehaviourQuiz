@@ -16,12 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GroupsActivity">
-
-        </activity>
-        <activity android:name=".QuizActivity">
-
-        </activity>
+        <activity android:name=".GroupsActivity" />
+        <activity android:name=".QuizActivity" />
+        <activity android:name=".QuizResultActivity" />
     </application>
 
 </manifest>

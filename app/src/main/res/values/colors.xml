@@ -3,9 +3,10 @@
     <color name="colorTextGroup">#FF000000</color>
     <color name="colorTextItem">#FF000000</color>
     <color name="colorTextQuiz">#FF000000</color>
-    <color name="colorBackgroundUnfinished">#770000FF</color>
-    <color name="colorBackgroundFinished">#77FF0000</color>
-    <color name="colorBackgroundBack">#33111111</color>
+    <color name="colorBackgroundUnfinished">#77FF0077</color>
+    <color name="colorBackgroundFinished">#770000FF</color>
+    <color name="colorBackgroundBack">#11111111</color>
+    <color name="colorActionBar">#55111111</color>
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".QuizResultActivity"
+    android:background="@color/colorBackgroundBack">
+
+    <TextView
+        android:id="@+id/quizresult_title"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textColor="@color/colorTextQuiz"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/quizresult_result"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:textColor="@color/colorTextQuiz"
+        android:textStyle="bold"
+        android:textSize="80dp"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <Button
+            android:id="@+id/quizresult_endbutton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="100"
+            android:gravity="center_horizontal"
+            android:text="@string/quizresult_buttontext"
+            android:textColor="@color/colorTextQuiz"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

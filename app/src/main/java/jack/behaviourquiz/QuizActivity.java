@@ -1,18 +1,26 @@
 package jack.behaviourquiz;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Random;
 
 import static jack.behaviourquiz.MainActivity.TAG;
 
-public class QuizActivity extends Activity implements View.OnClickListener {
+public class QuizActivity extends BaseActivity implements View.OnClickListener, DialogInterface.OnDismissListener {
+
+    public static final String EXPLANATION_TEXT = "explanationText";
 
     private int GroupNumber, ItemNumber;
     private int QuestionNumber, CorrectAnswerNumber;
@@ -78,10 +86,21 @@ public class QuizActivity extends Activity implements View.OnClickListener {
             else
                 AnswerView[i].setText("");
         }
+
+        int noColor = Color.argb(0,0,0,0);
+        AnswerView[0].setBackgroundColor(noColor);
+        AnswerView[1].setBackgroundColor(noColor);
+        AnswerView[2].setBackgroundColor(noColor);
+        AnswerView[3].setBackgroundColor(noColor);
     }
 
     private void endQuiz() {
-        Toast.makeText(getApplicationContext(), "Correct: " + QuestionsCorrect + ", Wrong: " + QuestionsWrong, Toast.LENGTH_LONG).show();
+        Intent resultIntent = new Intent(getApplicationContext(), QuizResultActivity.class);
+        resultIntent.putExtra(MainActivity.EXTRA_QUIZ_GROUP_NUMBER, GroupNumber);
+        resultIntent.putExtra(MainActivity.EXTRA_QUIZ_ITEM_NUMBER, ItemNumber);
+        resultIntent.putExtra(MainActivity.EXTRA_QUIZ_CORRECT, QuestionsCorrect);
+        resultIntent.putExtra(MainActivity.EXTRA_QUIZ_WRONG, QuestionsWrong);
+        startActivity(resultIntent);
         finish();
     }
 
@@ -95,13 +114,30 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         if(view.getId() == R.id.quizitem_answer4) selectedAnswer = 3;
         if(selectedAnswer > myQuiz.quizquestions.get(QuestionNumber).wrongAnswer.size())
             return; // ignore click
+
+        view.setBackgroundColor(Color.parseColor("#66111111"));
+
         if(selectedAnswer == CorrectAnswerNumber) {
             answeredCorrect = true;
             QuestionsCorrect++;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    moveToNextQuestion();
+                }
+            }, 1000);
         }
-        else
+        else {
+            ExplanationFragment explanationFragment = new ExplanationFragment();
+            Bundle args = new Bundle();
+            args.putString(EXPLANATION_TEXT, myQuiz.quizquestions.get(QuestionNumber).explanation);
+            explanationFragment.setArguments(args);
+            explanationFragment.show(getFragmentManager(), "explanationFragment");
             QuestionsWrong++;
+        }
+    }
 
+    protected void moveToNextQuestion() {
         QuestionNumber++;
         if(QuestionNumber >= myQuiz.quizquestions.size())
             endQuiz();
@@ -109,5 +145,30 @@ public class QuizActivity extends Activity implements View.OnClickListener {
             setQuizQuestion();
             ProgressView.setText(QuestionNumber + " / " + myQuiz.quizquestions.size());
         }
+    }
+
+    public static class ExplanationFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Bundle args = getArguments();
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle("Explanation")
+                    .setMessage(args.getString(EXPLANATION_TEXT))
+                    .create();
+        }
+
+        @Override
+        public void onDismiss(DialogInterface dialog) {
+            super.onDismiss(dialog);
+            final Activity activity = getActivity();
+            if(activity instanceof DialogInterface.OnDismissListener) {
+                ((DialogInterface.OnDismissListener)activity).onDismiss(dialog);
+            }
+        }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialogInterface) {
+        moveToNextQuestion();
     }
 }
