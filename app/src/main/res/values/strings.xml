@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BehaviourQuiz</string>
+    <string name="app_name">BehaviorQuiz</string>
     <string name="quizresult_buttontext">Ok</string>
     <string name="preference_file_key">jack.behaviourquiz.PREFERENCE_FILE_KEY</string>
     <string name="menu_settings_text">Settings</string>

@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +24,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
     private int GroupNumber, ItemNumber;
     private int QuestionNumber, CorrectAnswerNumber;
     private int QuestionsCorrect, QuestionsWrong;
+    private boolean allowClicks;
     private Random rand;
 
     private TextView TitleView, ProgressView, QuestionView;
@@ -92,6 +92,8 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         AnswerView[1].setBackgroundColor(noColor);
         AnswerView[2].setBackgroundColor(noColor);
         AnswerView[3].setBackgroundColor(noColor);
+
+        allowClicks = true;
     }
 
     private void endQuiz() {
@@ -106,6 +108,10 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onClick(View view) {
+        if(!allowClicks) {
+            return;
+        }
+
         int selectedAnswer = 0;
         boolean answeredCorrect = false;
         if(view.getId() == R.id.quizitem_answer1) selectedAnswer = 0;
@@ -115,6 +121,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         if(selectedAnswer > myQuiz.quizquestions.get(QuestionNumber).wrongAnswer.size())
             return; // ignore click
 
+        allowClicks = false;
         view.setBackgroundColor(Color.parseColor("#66111111"));
 
         if(selectedAnswer == CorrectAnswerNumber) {

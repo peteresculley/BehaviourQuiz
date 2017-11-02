@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,8 +30,6 @@ public class MainActivity extends BaseActivity {
 
     protected static QuizData mQuizData;
 
-    private ArrayList<String> groups;
-    private HashMap<String, ArrayList<String>> items;
     private QuizAdapter mAdapter;
     private boolean[] itemsFinished;
 
@@ -43,7 +42,7 @@ public class MainActivity extends BaseActivity {
 
         Log.d(TAG, "Started Successfully");
 
-        mAdapter = new QuizAdapter(getApplicationContext(), R.layout.list_groups, groups);
+        mAdapter = new QuizAdapter(getApplicationContext(), R.layout.list_groups, mQuizData.quiz.sections);
 
         GroupListView = (ListView) findViewById(R.id.main_list);
         GroupListView.setAdapter(mAdapter);
@@ -51,9 +50,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent startGroups = new Intent(MainActivity.this, GroupsActivity.class);
-                startGroups.putExtra(EXTRA_QUIZ_GROUP_NAME, groups.get(i));
                 startGroups.putExtra(EXTRA_QUIZ_GROUP_NUMBER, i);
-                startGroups.putStringArrayListExtra(EXTRA_QUIZ_ITEMS, items.get(groups.get(i)));
                 startActivity(startGroups);
             }
         });
@@ -66,23 +63,18 @@ public class MainActivity extends BaseActivity {
     }
 
     private void prepareData(int jsonResourceID) {
-        groups = new ArrayList<String>();
-        items = new HashMap<String, ArrayList<String>>();
 
         mQuizData = new Gson().fromJson(new InputStreamReader(getResources().openRawResource(jsonResourceID)), QuizData.class);
-        for(Section sec : mQuizData.quiz.sections) {
-            groups.add(sec.name);
-            ArrayList<String> ite = new ArrayList<String>();
-            for(Phase pha : sec.phases)
-                ite.add(pha.name);
-            items.put(sec.name, ite);
-        }
 
-        itemsFinished = new boolean[groups.size()];
+        itemsFinished = new boolean[mQuizData.quiz.sections.size()];
+        updateItemFinished();
+    }
+
+    private void updateItemFinished() {
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         for(int i = 0; i < itemsFinished.length; i++) {
             boolean isComplete = true;
-            for(int j = 0; j < items.get(groups.get(i)).size(); j++)
+            for(int j = 0; j < mQuizData.quiz.sections.get(i).phases.size(); j++)
                 isComplete &= sharedPref.getBoolean(QuizResultActivity.getQuestionKey(i, j), false);
             itemsFinished[i] = isComplete;
         }

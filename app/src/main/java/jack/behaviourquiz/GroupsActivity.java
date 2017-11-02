@@ -10,8 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import static jack.behaviourquiz.MainActivity.TAG;
 
 public class GroupsActivity extends BaseActivity {
@@ -19,9 +17,9 @@ public class GroupsActivity extends BaseActivity {
     private ListView ItemListView;
     private TextView TitleView;
 
-    private List<String> items;
     private String GroupName;
     private int GroupNumber;
+    private Section section;
     private boolean[] itemsFinished;
     private PhaseAdapter mAdapter;
 
@@ -31,17 +29,17 @@ public class GroupsActivity extends BaseActivity {
         setContentView(R.layout.activity_groups);
 
         Intent groupInfo = getIntent();
-        items = groupInfo.getStringArrayListExtra(MainActivity.EXTRA_QUIZ_ITEMS);
-        GroupName = groupInfo.getStringExtra(MainActivity.EXTRA_QUIZ_GROUP_NAME);
         GroupNumber = groupInfo.getIntExtra(MainActivity.EXTRA_QUIZ_GROUP_NUMBER, 0);
+        section = MainActivity.mQuizData.quiz.sections.get(GroupNumber);
+        GroupName = section.name;
 
-        itemsFinished = new boolean[items.size()];
+        itemsFinished = new boolean[section.phases.size()];
 
         TitleView = (TextView) findViewById(R.id.group_title);
         TitleView.setText(GroupName);
 
         ItemListView = (ListView) findViewById(R.id.group_list);
-        mAdapter = new PhaseAdapter(getApplicationContext(), R.layout.list_items, items, GroupNumber);
+        mAdapter = new PhaseAdapter(getApplicationContext(), R.layout.list_items, section.phases, GroupNumber);
         ItemListView.setAdapter(mAdapter);
         ItemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

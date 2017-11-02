@@ -8,8 +8,10 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import static jack.behaviourquiz.MainActivity.TAG;
 
@@ -26,6 +28,10 @@ public class BaseActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options_menu, menu);
+
+        MenuItem iconItem = (MenuItem) menu.findItem(R.id.menu_icon);
+        //((ImageView)iconItem.getActionView());
+        //iconItem.setIcon(R.drawable.a_copy_logo);
         return true;
     }
 

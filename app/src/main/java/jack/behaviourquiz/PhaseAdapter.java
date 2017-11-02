@@ -14,11 +14,11 @@ import java.util.List;
 public class PhaseAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> list;
+    private List<Phase> list;
     private LayoutInflater inflater;
     private int resource, groupNumber;
 
-    public PhaseAdapter(Context context, int resource, List<String> list, int groupNumber) {
+    public PhaseAdapter(Context context, int resource, List<Phase> list, int groupNumber) {
         this.context = context;
         this.list = list;
         this.resource = resource;
@@ -54,7 +54,7 @@ public class PhaseAdapter extends BaseAdapter {
 
         TextView quizText = (TextView) outView.findViewById(R.id.list_items_text);
 
-        quizText.setText(list.get(i));
+        quizText.setText(list.get(i).name);
 
         if(isComplete) {
             quizText.setTextColor(Color.argb(255, 54, 140, 93));

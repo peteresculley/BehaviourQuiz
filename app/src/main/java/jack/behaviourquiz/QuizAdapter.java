@@ -15,11 +15,11 @@ import java.util.List;
 public class QuizAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> list;
+    private List<Section> list;
     private LayoutInflater inflater;
     private int resource;
 
-    public QuizAdapter(Context context, int resource, List<String> list) {
+    public QuizAdapter(Context context, int resource, List<Section> list) {
         this.context = context;
         this.list = list;
         this.resource = resource;
@@ -48,7 +48,7 @@ public class QuizAdapter extends BaseAdapter {
             outView = inflater.inflate(resource, null);
         }
 
-        Section sec = MainActivity.mQuizData.quiz.sections.get(i);
+        Section sec = list.get(i);
         SharedPreferences sharedPref = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         int numComplete = 0;
         for(int j = 0; j < sec.phases.size(); j++) {
@@ -59,7 +59,7 @@ public class QuizAdapter extends BaseAdapter {
 
         TextView QuizText = (TextView) outView.findViewById(R.id.list_group_text);
 
-        QuizText.setText(list.get(i));
+        QuizText.setText(sec.name);
         ((TextView)outView.findViewById(R.id.list_group_rating_text)).setText(numComplete + "/" + sec.phases.size());
 
         if(numComplete >= sec.phases.size()) {
