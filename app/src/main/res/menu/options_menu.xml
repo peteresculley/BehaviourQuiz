@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/menu_icon"
-        android:title="Icon"
-        android:icon="@drawable/a_copy_logo"
-        android:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/menu_icon"-->
+        <!--android:title="Icon"-->
+        <!--android:icon="@drawable/a_copy_logo"-->
+        <!--android:showAsAction="always" />-->
 
     <item
         android:id="@+id/menu_home"

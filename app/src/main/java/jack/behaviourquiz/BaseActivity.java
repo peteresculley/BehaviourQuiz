@@ -22,14 +22,14 @@ public class BaseActivity extends Activity {
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(false);
+        //actionBar.setDisplayShowHomeEnabled(false);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options_menu, menu);
 
-        MenuItem iconItem = (MenuItem) menu.findItem(R.id.menu_icon);
+        //MenuItem iconItem = (MenuItem) menu.findItem(R.id.menu_icon);
         //((ImageView)iconItem.getActionView());
         //iconItem.setIcon(R.drawable.a_copy_logo);
         return true;
