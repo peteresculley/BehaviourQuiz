@@ -6,7 +6,10 @@
     <color name="colorBackgroundUnfinished">#77FF0077</color>
     <color name="colorBackgroundFinished">#770000FF</color>
     <color name="colorBackgroundBack">#11111111</color>
-    <color name="colorActionBar">#55111111</color>
+    <color name="colorActionBar">#FF2E2E2E</color>
+    <color name="colorActionBarText">#FFFFFFFF</color>
+
+    <color name="colorAlertDivider">#FFCB4F4F</color>
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>

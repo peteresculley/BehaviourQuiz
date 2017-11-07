@@ -3,15 +3,14 @@ package jack.behaviourquiz;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.view.View;
+import android.view.Window;
 
 import static jack.behaviourquiz.MainActivity.TAG;
 
@@ -21,17 +20,14 @@ public class BaseActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
-        //actionBar.setDisplayShowHomeEnabled(false);
+        if(actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options_menu, menu);
-
-        //MenuItem iconItem = (MenuItem) menu.findItem(R.id.menu_icon);
-        //((ImageView)iconItem.getActionView());
-        //iconItem.setIcon(R.drawable.a_copy_logo);
         return true;
     }
 
@@ -50,23 +46,20 @@ public class BaseActivity extends Activity {
                     goHomeIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(goHomeIntent);
                 }
-
                 return true;
 
             case R.id.menu_about:
-                new AboutFragment().show(getFragmentManager(), "aboutFragment");
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.MyApp_Dialog));
+                builder.setTitle(R.string.about_dialog_title);
+                builder.setMessage(R.string.about_dialog_message);
+                AlertDialog dialog = builder.show();
+
+                int titleDividerID = getResources().getIdentifier("titleDivider", "id", "android");
+                View titleDivider = dialog.findViewById(titleDividerID);
+                titleDivider.setBackgroundColor(getResources().getColor(R.color.colorAlertDivider));
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public static class AboutFragment extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return new AlertDialog.Builder(getActivity())
-                    .setTitle("About")
-                    .setMessage("Behavior Analysis teaching tool")
-                    .create();
-        }
     }
 }

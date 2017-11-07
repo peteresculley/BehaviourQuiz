@@ -5,4 +5,8 @@
     <string name="menu_settings_text">Settings</string>
     <string name="menu_home_text">Home</string>
     <string name="menu_about_text">About</string>
+    <string name="quiz_explanation_title">Wrong answer. Explanation:</string>
+    <string name="about_dialog_title">About</string>
+    <string name="about_dialog_message">Behavior Analysis teaching tool</string>
+
 </resources>

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class SettingsFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.MyApp_Dialog));
         builder.setMessage("Reset Progress?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override

@@ -2,13 +2,29 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
-        <!-- Customize your theme here. -->
         <item name="android:actionBarStyle">@style/MyApp.ActionBar</item>
+        <item name="android:actionButtonStyle">@style/MyApp.ActionButtonStyle</item>
+        <item name="android:actionOverflowButtonStyle">@style/MyApp.ActionOverFlowStyle</item>
+        <item name="android:alertDialogTheme">@style/MyApp_Dialog</item>
     </style>
 
     <style name="MyApp.ActionBar" parent="android:Widget.Holo.Light.ActionBar.Solid">
-        <!-- Blue background color & black bottom border -->
         <item name="android:background">@drawable/action_bar_color</item>
+        <item name="android:textColor">@color/colorActionBarText</item>
+        <item name="android:textColorSecondary">@color/colorActionBarText</item>
+    </style>
+
+    <style name="MyApp.ActionButtonStyle" parent="android:Widget.ActionButton">
+        <item name="android:textColor">@color/colorActionBarText</item>
+        <item name="android:textColorSecondary">@color/colorActionBarText</item>
+    </style>
+
+    <style name="MyApp.ActionOverFlowStyle" parent="android:Widget.ActionButton.Overflow">
+        <item name="android:src">@drawable/dots_vertical</item>
+    </style>
+
+    <style name="MyApp_Dialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
 </resources>

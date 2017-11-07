@@ -51,6 +51,14 @@ public class GroupsActivity extends BaseActivity {
             }
         });
 
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                updateFinishedItems();
+            }
+        });
+
         updateFinishedItems();
     }
 

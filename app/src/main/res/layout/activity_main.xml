@@ -8,11 +8,12 @@
     android:background="@color/colorBackgroundBack"
     android:orientation="vertical">
 
-    <ListView
+    <GridView
         android:id="@+id/main_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:minHeight="50dp" />
+        android:numColumns="auto_fit"
+        android:columnWidth="100dp" />
 
 </LinearLayout>

@@ -2,17 +2,17 @@ package jack.behaviourquiz;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Collections;
 import java.util.Random;
 
 import static jack.behaviourquiz.MainActivity.TAG;
@@ -68,11 +68,13 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
             return;
         TitleView.setText(myQuiz.name);
         ProgressView.setText("0 / " + myQuiz.quizquestions.size());
+        Collections.shuffle(myQuiz.quizquestions);
         setQuizQuestion();
     }
 
     private void setQuizQuestion() {
         QuizQuestion question = myQuiz.quizquestions.get(QuestionNumber);
+        Collections.shuffle(question.wrongAnswer);
         QuestionView.setText(question.question);
         CorrectAnswerNumber = rand.nextInt(Math.min(4, question.wrongAnswer.size() + 1));
         int wrongIndex = 0;
@@ -132,14 +134,26 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
                 public void run() {
                     moveToNextQuestion();
                 }
-            }, 1000);
+            }, 200);
         }
         else {
-            ExplanationFragment explanationFragment = new ExplanationFragment();
-            Bundle args = new Bundle();
-            args.putString(EXPLANATION_TEXT, myQuiz.quizquestions.get(QuestionNumber).explanation);
-            explanationFragment.setArguments(args);
-            explanationFragment.show(getFragmentManager(), "explanationFragment");
+            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.MyApp_Dialog));
+            builder.setTitle(R.string.quiz_explanation_title);
+            builder.setMessage(myQuiz.quizquestions.get(QuestionNumber).explanation);
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    final Activity activity = QuizActivity.this;
+                    if(activity instanceof DialogInterface.OnDismissListener) {
+                        ((DialogInterface.OnDismissListener)activity).onDismiss(dialog);
+                    }
+                }
+            });
+            AlertDialog dialog = builder.show();
+
+            int titleDividerID = getResources().getIdentifier("titleDivider", "id", "android");
+            View titleDivider = dialog.findViewById(titleDividerID);
+            titleDivider.setBackgroundColor(getResources().getColor(R.color.colorAlertDivider));
             QuestionsWrong++;
         }
     }
@@ -151,26 +165,6 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         else {
             setQuizQuestion();
             ProgressView.setText(QuestionNumber + " / " + myQuiz.quizquestions.size());
-        }
-    }
-
-    public static class ExplanationFragment extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            Bundle args = getArguments();
-            return new AlertDialog.Builder(getActivity())
-                    .setTitle("Explanation")
-                    .setMessage(args.getString(EXPLANATION_TEXT))
-                    .create();
-        }
-
-        @Override
-        public void onDismiss(DialogInterface dialog) {
-            super.onDismiss(dialog);
-            final Activity activity = getActivity();
-            if(activity instanceof DialogInterface.OnDismissListener) {
-                ((DialogInterface.OnDismissListener)activity).onDismiss(dialog);
-            }
         }
     }
 

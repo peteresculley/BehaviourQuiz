@@ -4,23 +4,23 @@
 
     <!--<item-->
         <!--android:id="@+id/menu_icon"-->
-        <!--android:title="Icon"-->
-        <!--android:icon="@drawable/a_copy_logo"-->
-        <!--android:showAsAction="always" />-->
+        <!--android:icon="@drawable/a_copy_logo2"-->
+        <!--android:showAsAction="always"-->
+        <!--android:title="Icon" />-->
 
     <item
         android:id="@+id/menu_home"
         android:title="@string/menu_home_text"
-        android:showAsAction="always" />
+        android:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_settings"
         android:title="@string/menu_settings_text"
-        android:showAsAction="always" />
+        android:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_about"
         android:title="@string/menu_about_text"
-        android:showAsAction="always" />
+        android:showAsAction="ifRoom" />
 
 </menu>
