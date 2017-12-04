@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
@@ -98,6 +99,13 @@ public class MainActivity extends BaseActivity {
     private void prepareData(int jsonResourceID) {
 
         mQuizData = new Gson().fromJson(new InputStreamReader(getResources().openRawResource(jsonResourceID)), QuizData.class);
+        for(Section section : mQuizData.quiz.sections) {
+            for(Phase phase : section.phases) {
+                for(int i = 0; i < phase.quizquestions.size(); i++) {
+                    phase.quizquestions.get(i).order = i;
+                }
+            }
+        }
 
         itemsFinished = new boolean[mQuizData.quiz.sections.size()];
         updateItemFinished();

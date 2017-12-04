@@ -32,8 +32,15 @@
         android:textColor="@color/colorTextQuiz"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="3dp"
         android:paddingLeft="5dp" />
+
+    <ImageView
+        android:id="@+id/quizitem_questionimage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:paddingLeft="5dp"/>
 
     <TextView
         android:id="@+id/quizitem_answer1"

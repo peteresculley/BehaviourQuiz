@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Collections;
@@ -28,6 +31,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
     private Random rand;
 
     private TextView TitleView, ProgressView, QuestionView;
+    private ImageView QuestionImageView;
     private TextView[] AnswerView = new TextView[4];
 
     private Phase myQuiz;
@@ -51,6 +55,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         TitleView = (TextView) findViewById(R.id.quizitem_title);
         ProgressView = (TextView) findViewById(R.id.quizitem_progress);
         QuestionView = (TextView) findViewById(R.id.quizitem_question);
+        QuestionImageView = (ImageView) findViewById(R.id.quizitem_questionimage);
         AnswerView[0] = (TextView) findViewById(R.id.quizitem_answer1);
         AnswerView[1] = (TextView) findViewById(R.id.quizitem_answer2);
         AnswerView[2] = (TextView) findViewById(R.id.quizitem_answer3);
@@ -76,6 +81,18 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         QuizQuestion question = myQuiz.quizquestions.get(QuestionNumber);
         Collections.shuffle(question.wrongAnswer);
         QuestionView.setText(question.question);
+        Resources res = getResources();
+        String imageFilename = ((char) ('a' + GroupNumber)) + "_" + TwoCharString(ItemNumber + 1) + "_" + TwoCharString(question.order + 1);
+        int imageFileID = res.getIdentifier(imageFilename, "drawable", this.getPackageName());
+        Log.i(TAG, "Question Image: filename: " + imageFilename + " , ID: " + imageFileID);
+        ViewGroup.LayoutParams layoutParams = QuestionImageView.getLayoutParams();
+        if(imageFileID != 0) {
+            layoutParams.height = 400;
+            QuestionImageView.setImageResource(imageFileID);
+        } else {
+            layoutParams.height = 0;
+        }
+        QuestionImageView.setLayoutParams(layoutParams);
         CorrectAnswerNumber = rand.nextInt(Math.min(4, question.wrongAnswer.size() + 1));
         int wrongIndex = 0;
         for(int i = 0; i < 4; i++) {
@@ -171,5 +188,15 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
         moveToNextQuestion();
+    }
+
+    private String TwoCharString(int i) {
+        if(i < 0)
+            return "-0";
+        if(i < 10)
+            return "0" + i;
+        if(i < 100)
+            return "" + i;
+        return "" + (i % 100);
     }
 }
