@@ -61,7 +61,7 @@ public class SectionAdapter extends BaseAdapter {
         SharedPreferences sharedPref = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         int numComplete = 0;
         for(int j = 0; j < sec.phases.size(); j++) {
-            if(sharedPref.getBoolean(QuizResultActivity.getQuestionKey(i, j), false)) {
+            if(sharedPref.getString(QuizResultActivity.getQuestionKey(i, j), "") == Constants.QUIZ_STATUS_CORRECT) {
                 numComplete++;
             }
         }

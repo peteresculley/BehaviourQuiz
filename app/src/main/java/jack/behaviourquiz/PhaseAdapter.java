@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import static jack.behaviourquiz.Constants.QUIZ_STATUS_ATTEMPTED;
+import static jack.behaviourquiz.Constants.QUIZ_STATUS_CORRECT;
+
 public class PhaseAdapter extends BaseAdapter {
 
     private Context context;
@@ -50,14 +53,17 @@ public class PhaseAdapter extends BaseAdapter {
 
         Phase phase = MainActivity.mQuizData.quiz.sections.get(groupNumber).phases.get(i);
         SharedPreferences sharedPref = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        boolean isComplete = sharedPref.getBoolean(QuizResultActivity.getQuestionKey(groupNumber, i), false);
+        String quizStatus = sharedPref.getString(QuizResultActivity.getQuestionKey(groupNumber, i), "");
 
         TextView quizText = (TextView) outView.findViewById(R.id.list_items_text);
 
         quizText.setText(list.get(i).name);
 
-        if(isComplete) {
+        if(quizStatus == QUIZ_STATUS_CORRECT) {
             quizText.setTextColor(Color.argb(255, 54, 140, 93));
+        }
+        else if(quizStatus == QUIZ_STATUS_ATTEMPTED) {
+            quizText.setTextColor(Color.argb(255, 255, 128, 0));
         }
         else {
             quizText.setTextColor(Color.argb(255, 0, 0, 0));

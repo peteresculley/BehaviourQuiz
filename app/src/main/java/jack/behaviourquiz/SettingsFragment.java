@@ -11,6 +11,8 @@ import android.view.ContextThemeWrapper;
 
 import java.util.Map;
 
+import static jack.behaviourquiz.Constants.QUIZ_STATUS_NOT_TAKEN;
+
 public class SettingsFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -25,7 +27,7 @@ public class SettingsFragment extends DialogFragment {
                         SharedPreferences.Editor editor = sharedPref.edit();
                         for(Map.Entry<String, ?> entry : allEntries.entrySet())
                             if(QuizResultActivity.isQuestionKey(entry.getKey()))
-                                editor.putBoolean(entry.getKey(), false);
+                                editor.putString(entry.getKey(), QUIZ_STATUS_NOT_TAKEN);
                         editor.commit();
                     }
                 })

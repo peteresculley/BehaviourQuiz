@@ -10,7 +10,8 @@
     <TextView
         android:id="@+id/quizresult_title"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
+        android:minHeight="70dp"
         android:textColor="@color/colorTextQuiz"
         android:textStyle="bold"
         android:textSize="25dp"

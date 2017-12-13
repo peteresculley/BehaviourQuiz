@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="jack.behaviourquiz.MainActivity"
-    android:background="@color/colorBackgroundBack"
+    android:background="@color/colorBackgroundGroups"
     android:id="@+id/group_layout">
 
     <TextView
@@ -16,7 +16,6 @@
         android:textStyle="bold"
         android:paddingLeft="5dp"
         android:gravity="center_vertical"
-        android:background="#33111111"
         android:textColor="@color/colorTextGroup" />
 
     <ListView
@@ -24,6 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="2dp"
         android:layout_below="@id/group_title" />
 
 </RelativeLayout>

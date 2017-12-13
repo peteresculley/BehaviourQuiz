@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static jack.behaviourquiz.Constants.QUIZ_STATUS_ATTEMPTED;
+import static jack.behaviourquiz.Constants.QUIZ_STATUS_CORRECT;
+
 public class QuizResultActivity extends BaseActivity {
 
     private int GroupNumber, ItemNumber;
@@ -55,8 +58,15 @@ public class QuizResultActivity extends BaseActivity {
         if(quizPassed) {
             SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putBoolean(getQuestionKey(GroupNumber, ItemNumber), true);
+            editor.putString(getQuestionKey(GroupNumber, ItemNumber), QUIZ_STATUS_CORRECT);
             editor.commit();
+        } else {
+            SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+            if(sharedPref.getString(getQuestionKey(GroupNumber, ItemNumber), "") != QUIZ_STATUS_CORRECT) {
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(getQuestionKey(GroupNumber, ItemNumber), QUIZ_STATUS_ATTEMPTED);
+                editor.commit();
+            }
         }
     }
 

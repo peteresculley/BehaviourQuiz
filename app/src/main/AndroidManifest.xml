@@ -19,8 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".GroupsActivity" />
-        <activity android:name=".QuizActivity" />
-        <activity android:name=".QuizResultActivity" />
+        <activity android:name=".QuizActivity" android:configChanges="orientation|screenSize" />
+        <activity android:name=".QuizResultActivity" android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

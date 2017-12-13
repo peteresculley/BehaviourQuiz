@@ -20,7 +20,7 @@ public class GroupsActivity extends BaseActivity {
     private String GroupName;
     private int GroupNumber;
     private Section section;
-    private boolean[] itemsFinished;
+    private String[] itemsFinished;
     private PhaseAdapter mAdapter;
 
     @Override
@@ -33,7 +33,7 @@ public class GroupsActivity extends BaseActivity {
         section = MainActivity.mQuizData.quiz.sections.get(GroupNumber);
         GroupName = section.name;
 
-        itemsFinished = new boolean[section.phases.size()];
+        itemsFinished = new String[section.phases.size()];
 
         TitleView = (TextView) findViewById(R.id.group_title);
         TitleView.setText(GroupName);
@@ -78,7 +78,7 @@ public class GroupsActivity extends BaseActivity {
         Log.d(TAG, "Update Items");
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         for(int i = 0; i < itemsFinished.length; i++) {
-            itemsFinished[i] = sharedPref.getBoolean(QuizResultActivity.getQuestionKey(GroupNumber, i), false);
+            itemsFinished[i] = sharedPref.getString(QuizResultActivity.getQuestionKey(GroupNumber, i), "");
         }
         mAdapter.notifyDataSetChanged();
     }

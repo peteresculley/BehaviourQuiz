@@ -28,6 +28,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
     private int QuestionNumber, CorrectAnswerNumber;
     private int QuestionsCorrect, QuestionsWrong;
     private boolean allowClicks;
+    private boolean firstAttempt;
     private Random rand;
 
     private TextView TitleView, ProgressView, QuestionView;
@@ -46,6 +47,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         QuestionNumber = 0;
         QuestionsCorrect = 0;
         QuestionsWrong = 0;
+        firstAttempt = true;
 
         Intent quizInfo = getIntent();
         GroupNumber = quizInfo.getIntExtra(MainActivity.EXTRA_QUIZ_GROUP_NUMBER, 0);
@@ -97,9 +99,9 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         int wrongIndex = 0;
         for(int i = 0; i < 4; i++) {
             if(i == CorrectAnswerNumber)
-                AnswerView[i].setText(question.correctAnswer);
+                AnswerView[i].setText((i+1) + ". " + question.correctAnswer);
             else if(wrongIndex < question.wrongAnswer.size()) {
-                AnswerView[i].setText(question.wrongAnswer.get(wrongIndex));
+                AnswerView[i].setText((i+1) + ". " + question.wrongAnswer.get(wrongIndex));
                 wrongIndex++;
             }
             else
@@ -144,8 +146,10 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         view.setBackgroundColor(Color.parseColor("#66111111"));
 
         if(selectedAnswer == CorrectAnswerNumber) {
-            answeredCorrect = true;
-            QuestionsCorrect++;
+            if(firstAttempt) {
+                answeredCorrect = true;
+                QuestionsCorrect++;
+            }
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -171,8 +175,11 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
             int titleDividerID = getResources().getIdentifier("titleDivider", "id", "android");
             View titleDivider = dialog.findViewById(titleDividerID);
             titleDivider.setBackgroundColor(getResources().getColor(R.color.colorAlertDivider));
-            QuestionsWrong++;
+            if(firstAttempt) {
+                QuestionsWrong++;
+            }
         }
+        firstAttempt = false;
     }
 
     protected void moveToNextQuestion() {
@@ -181,13 +188,15 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
             endQuiz();
         else {
             setQuizQuestion();
+            firstAttempt = true;
             ProgressView.setText(QuestionNumber + " / " + myQuiz.quizquestions.size());
         }
     }
 
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
-        moveToNextQuestion();
+        //moveToNextQuestion();
+        allowClicks = true;
     }
 
     private String TwoCharString(int i) {

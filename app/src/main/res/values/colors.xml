@@ -6,10 +6,14 @@
     <color name="colorBackgroundUnfinished">#77FF0077</color>
     <color name="colorBackgroundFinished">#770000FF</color>
     <color name="colorBackgroundBack">#11111111</color>
+    <color name="colorBackgroundGroups">#FFC94E4E</color>
     <color name="colorActionBar">#FF2E2E2E</color>
     <color name="colorActionBarText">#FFFFFFFF</color>
 
     <color name="colorAlertDivider">#FFCB4F4F</color>
+
+    <color name="items_gradient_start">#FFFFFFFF</color>
+    <color name="items_gradient_end">#FFBBBBBB</color>
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
