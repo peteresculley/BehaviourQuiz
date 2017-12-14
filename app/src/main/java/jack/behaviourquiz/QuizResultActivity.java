@@ -71,10 +71,10 @@ public class QuizResultActivity extends BaseActivity {
     }
 
     protected static String getQuestionKey(int groupNum, int itemNum) {
-        return "Quiz " + groupNum + " " + itemNum;
+        return "QuizKey " + groupNum + " " + itemNum;
     }
 
     protected static boolean isQuestionKey(String key) {
-        return key.startsWith("Quiz ");
+        return key.startsWith("QuizKey ");
     }
 }

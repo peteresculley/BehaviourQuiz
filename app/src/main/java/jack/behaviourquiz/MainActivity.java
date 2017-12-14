@@ -73,20 +73,6 @@ public class MainActivity extends BaseActivity {
         });
 
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        ///////// update from Version 1
-        Map<String, ?> allPrefs = sharedPreferences.getAll();
-        for(String key : allPrefs.keySet()) {
-            if(QuizResultActivity.isQuestionKey(key)) {
-                if(allPrefs.get(key).getClass().equals(Boolean.class)) {
-                    if(sharedPreferences.getBoolean(key, false)) {
-                        sharedPreferences.edit().putString(key, Constants.QUIZ_STATUS_CORRECT).commit();
-                    } else {
-                        sharedPreferences.edit().putString(key, Constants.QUIZ_STATUS_NOT_TAKEN).commit();
-                    }
-                }
-            }
-        }
-        //////// end update
         sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
