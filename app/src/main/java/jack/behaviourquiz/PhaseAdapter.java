@@ -59,10 +59,10 @@ public class PhaseAdapter extends BaseAdapter {
 
         quizText.setText(list.get(i).name);
 
-        if(quizStatus == QUIZ_STATUS_CORRECT) {
+        if(quizStatus.equals(QUIZ_STATUS_CORRECT)) {
             quizText.setTextColor(Color.argb(255, 54, 140, 93));
         }
-        else if(quizStatus == QUIZ_STATUS_ATTEMPTED) {
+        else if(quizStatus.equals(QUIZ_STATUS_ATTEMPTED)) {
             quizText.setTextColor(Color.argb(255, 255, 128, 0));
         }
         else {

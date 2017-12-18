@@ -62,7 +62,7 @@ public class QuizResultActivity extends BaseActivity {
             editor.commit();
         } else {
             SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-            if(sharedPref.getString(getQuestionKey(GroupNumber, ItemNumber), "") != QUIZ_STATUS_CORRECT) {
+            if(!sharedPref.getString(getQuestionKey(GroupNumber, ItemNumber), "").equals(QUIZ_STATUS_CORRECT)) {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString(getQuestionKey(GroupNumber, ItemNumber), QUIZ_STATUS_ATTEMPTED);
                 editor.commit();

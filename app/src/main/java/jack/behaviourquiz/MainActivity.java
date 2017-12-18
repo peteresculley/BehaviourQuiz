@@ -107,7 +107,7 @@ public class MainActivity extends BaseActivity {
         for(int i = 0; i < itemsFinished.length; i++) {
             boolean isComplete = true;
             for(int j = 0; j < mQuizData.quiz.sections.get(i).phases.size(); j++)
-                isComplete &= sharedPref.getString(QuizResultActivity.getQuestionKey(i, j), "") == Constants.QUIZ_STATUS_CORRECT;
+                isComplete &= sharedPref.getString(QuizResultActivity.getQuestionKey(i, j), "").equals(Constants.QUIZ_STATUS_CORRECT);
             itemsFinished[i] = isComplete;
         }
     }
