@@ -10,7 +10,6 @@ import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 
 import static jack.behaviourquiz.MainActivity.TAG;
 

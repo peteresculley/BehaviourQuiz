@@ -15,8 +15,7 @@ import com.google.gson.Gson;
 
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.Random;
 
 public class MainActivity extends BaseActivity {
 
@@ -29,6 +28,7 @@ public class MainActivity extends BaseActivity {
     private GridView GroupGridView;
 
     protected static QuizData mQuizData;
+    protected static Phase RandomQuiz = new Phase();
     protected static Resources resources;
 
     private SectionAdapter mAdapter;
@@ -58,6 +58,7 @@ public class MainActivity extends BaseActivity {
         icons.add(resources.getDrawable(R.drawable.icon_assessment));
         icons.add(resources.getDrawable(R.drawable.icon_intervention));
         icons.add(resources.getDrawable(R.drawable.icon_implementation_and_managment));
+        icons.add(resources.getDrawable(R.drawable.icon_fundamental_knowledge));
 
         mAdapter = new SectionAdapter(getApplicationContext(), R.layout.list_groups, icons, mQuizData.quiz.sections);
 
@@ -98,6 +99,8 @@ public class MainActivity extends BaseActivity {
             }
         }
 
+        createRandomQuiz();
+
         itemsFinished = new boolean[mQuizData.quiz.sections.size()];
         updateItemFinished();
     }
@@ -115,5 +118,34 @@ public class MainActivity extends BaseActivity {
     public static int getRatingColor() {
         if(resources == null) return 0;
         return resources.getColor(android.R.color.darker_gray);
+    }
+
+    public void onRandomQuestionsClick(View view) {
+        createRandomQuiz();
+
+        Intent startQuiz = new Intent(MainActivity.this, QuizActivity.class);
+        startQuiz.putExtra(MainActivity.EXTRA_QUIZ_GROUP_NUMBER, -1);
+        startQuiz.putExtra(MainActivity.EXTRA_QUIZ_ITEM_NUMBER, -1);
+        startActivity(startQuiz);
+    }
+
+    private void createRandomQuiz() {
+        RandomQuiz.name = "Random Questions";
+        RandomQuiz.quizquestions = new ArrayList<QuizQuestion>();
+        Random rand = new Random();
+
+        for(int i = 0; i < 10;) {
+            int groupNum = rand.nextInt(mQuizData.quiz.sections.size());
+            Section section = mQuizData.quiz.sections.get(groupNum);
+            int quizNum = rand.nextInt(section.phases.size());
+            Phase phase = section.phases.get(quizNum);
+            int questionNum = rand.nextInt(phase.quizquestions.size());
+            QuizQuestion question = phase.quizquestions.get(questionNum);
+
+            if(!RandomQuiz.quizquestions.contains(question)) {
+                RandomQuiz.quizquestions.add(question);
+                i++;
+            }
+        }
     }
 }

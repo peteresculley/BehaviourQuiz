@@ -52,7 +52,11 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         Intent quizInfo = getIntent();
         GroupNumber = quizInfo.getIntExtra(MainActivity.EXTRA_QUIZ_GROUP_NUMBER, 0);
         ItemNumber = quizInfo.getIntExtra(MainActivity.EXTRA_QUIZ_ITEM_NUMBER, 0);
-        myQuiz = MainActivity.mQuizData.quiz.sections.get(GroupNumber).phases.get(ItemNumber);
+        if(GroupNumber >= 0 && ItemNumber >= 0) {
+            myQuiz = MainActivity.mQuizData.quiz.sections.get(GroupNumber).phases.get(ItemNumber);
+        } else {
+            myQuiz = MainActivity.RandomQuiz;
+        }
 
         TitleView = (TextView) findViewById(R.id.quizitem_title);
         ProgressView = (TextView) findViewById(R.id.quizitem_progress);

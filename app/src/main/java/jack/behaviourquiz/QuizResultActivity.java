@@ -28,7 +28,11 @@ public class QuizResultActivity extends BaseActivity {
         AnswerCorrect = resultInfo.getIntExtra(MainActivity.EXTRA_QUIZ_CORRECT, 0);
         AnswerWrong = resultInfo.getIntExtra(MainActivity.EXTRA_QUIZ_WRONG, 0);
 
-        myQuiz = MainActivity.mQuizData.quiz.sections.get(GroupNumber).phases.get(ItemNumber);
+        if(GroupNumber >= 0 && ItemNumber >= 0) {
+            myQuiz = MainActivity.mQuizData.quiz.sections.get(GroupNumber).phases.get(ItemNumber);
+        } else {
+            myQuiz = MainActivity.RandomQuiz;
+        }
         AnswerTotal = myQuiz.quizquestions.size();
 
         TextView TitleView = (TextView) findViewById(R.id.quizresult_title);
@@ -50,7 +54,9 @@ public class QuizResultActivity extends BaseActivity {
             }
         });
 
-        updateQuizRecord();
+        if(GroupNumber >= 0 && ItemNumber >= 0) {
+            updateQuizRecord();
+        }
     }
 
     private void updateQuizRecord() {
