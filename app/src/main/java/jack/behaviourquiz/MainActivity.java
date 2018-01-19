@@ -58,7 +58,7 @@ public class MainActivity extends BaseActivity {
         icons.add(resources.getDrawable(R.drawable.icon_assessment));
         icons.add(resources.getDrawable(R.drawable.icon_intervention));
         icons.add(resources.getDrawable(R.drawable.icon_implementation_and_managment));
-        icons.add(resources.getDrawable(R.drawable.icon_fundamental_knowledge));
+        icons.add(resources.getDrawable(R.drawable.icon_foundational_knowledge));
 
         mAdapter = new SectionAdapter(getApplicationContext(), R.layout.list_groups, icons, mQuizData.quiz.sections);
 
