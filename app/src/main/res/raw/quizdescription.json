@@ -414,14 +414,14 @@
                 "explanation": "Latency is defined as the amount of time between the stimulus and the response. (Cooper, Heron, Heward, 2007)"
               },
               {
-                "question": "James pressed the brake pedal for 33 seconds. The stoplight turned green. 1.2 seconds later James pressed the gas pedal. James pressed the gas pedal for 17 seconds until he saw a police car. .5  seconds after seeing the police car James pressed the brake pedal for 3 seconds. What duration of pushing the brake pedal?",
+                "question": "James pressed the brake pedal for 33 seconds. The stoplight turned green. 1.2 seconds later James pressed the gas pedal. James pressed the gas pedal for 17 seconds until he saw a police car. .5  seconds after seeing the police car James pressed the brake pedal for 3 seconds. What is the total duration of pushing the brake pedal?",
                 "correctAnswer": "36 seconds",
                 "wrongAnswer": [
                   "33 seconds",
                   "3 seconds",
                   ".5 seconds"
                 ],
-                "explanation": "Latency is defined as the amount of time between the stimulus and the response. (Cooper, Heron, Heward, 2007)"
+                "explanation": "James pushed the brake pedal for 33 seconds, and then again for 3 seconds. This is a total of 36 seconds. (Cooper, Heron, Heward, 2007)"
               }
             ]
           },
@@ -7745,7 +7745,7 @@
               },
               {
                 "question": "How might you explain positive reinforcement to somebody who understands ABA jargon well?",
-                "correctAnswer": "Occurs when a behavior is followed immediately by the presentation of a stimulus that decreases the future frequency of the behavior.",
+                "correctAnswer": "Occurs when a behavior is followed immediately by the presentation of a stimulus that increases the future frequency of the behavior.",
                 "wrongAnswer": [
                   "Providing rewards, attention, praise, etc. to get more of the behavior",
                   "Something good or bad that happens after a person does something",
@@ -13795,7 +13795,7 @@
                 "explanation": "The SΔP is a stimulus that indicates the unavailability of punishment. (Cooper et al., 2007, p. 393-396)"
               },
               {
-                "question": "Elaine is given $.25 whenever she asks her grandfather for money. Seeing her grandfather indicates that reinforcement is available. However, when her grandmother is present, Elaine is put in time out for asking for money, which has decreased the frequency of asking for money in her grandmother’s presence. The grandmother’s absence is likely an:",
+                "question": "Elaine is given $.25 whenever she asks her grandfather for money. Seeing her grandfather indicates that reinforcement is available. However, when her grandmother is present, Elaine is put in time out for asking for money, which has decreased the frequency of asking for money in her grandmother’s presence. The grandmother’s presence is likely an:",
                 "correctAnswer": "SDP",
                 "wrongAnswer": [
                   "SΔ",

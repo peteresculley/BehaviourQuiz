@@ -91,10 +91,12 @@ public class MainActivity extends BaseActivity {
     private void prepareData(int jsonResourceID) {
 
         mQuizData = new Gson().fromJson(new InputStreamReader(getResources().openRawResource(jsonResourceID)), QuizData.class);
-        for(Section section : mQuizData.quiz.sections) {
-            for(Phase phase : section.phases) {
-                for(int i = 0; i < phase.quizquestions.size(); i++) {
-                    phase.quizquestions.get(i).order = i;
+        for(int i = 0; i < mQuizData.quiz.sections.size(); i++) {
+            Section section = mQuizData.quiz.sections.get(i);
+            for(int j = 0; j < section.phases.size(); j++) {
+                Phase phase = section.phases.get(j);
+                for(int k = 0; k < phase.quizquestions.size(); k++) {
+                    phase.quizquestions.get(k).imageFilename = ((char) ('a' + i)) + "_" + TwoCharString(j + 1) + "_" + TwoCharString(k + 1);
                 }
             }
         }
@@ -147,5 +149,15 @@ public class MainActivity extends BaseActivity {
                 i++;
             }
         }
+    }
+
+    private String TwoCharString(int i) {
+        if(i < 0)
+            return "-0";
+        if(i < 10)
+            return "0" + i;
+        if(i < 100)
+            return "" + i;
+        return "" + (i % 100);
     }
 }

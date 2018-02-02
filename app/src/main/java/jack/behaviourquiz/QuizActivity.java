@@ -88,9 +88,8 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         Collections.shuffle(question.wrongAnswer);
         QuestionView.setText(question.question);
         Resources res = getResources();
-        String imageFilename = ((char) ('a' + GroupNumber)) + "_" + TwoCharString(ItemNumber + 1) + "_" + TwoCharString(question.order + 1);
-        int imageFileID = res.getIdentifier(imageFilename, "drawable", this.getPackageName());
-        Log.i(TAG, "Question Image: filename: " + imageFilename + " , ID: " + imageFileID);
+        int imageFileID = res.getIdentifier(question.imageFilename, "drawable", this.getPackageName());
+        Log.i(TAG, "Question Image: filename: " + question.imageFilename + " , ID: " + imageFileID);
         ViewGroup.LayoutParams layoutParams = QuestionImageView.getLayoutParams();
         if(imageFileID != 0) {
             layoutParams.height = 400;
@@ -138,7 +137,6 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         }
 
         int selectedAnswer = 0;
-        boolean answeredCorrect = false;
         if(view.getId() == R.id.quizitem_answer1) selectedAnswer = 0;
         if(view.getId() == R.id.quizitem_answer2) selectedAnswer = 1;
         if(view.getId() == R.id.quizitem_answer3) selectedAnswer = 2;
@@ -151,7 +149,6 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
 
         if(selectedAnswer == CorrectAnswerNumber) {
             if(firstAttempt) {
-                answeredCorrect = true;
                 QuestionsCorrect++;
             }
             new Handler().postDelayed(new Runnable() {
@@ -199,17 +196,6 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
-        //moveToNextQuestion();
         allowClicks = true;
-    }
-
-    private String TwoCharString(int i) {
-        if(i < 0)
-            return "-0";
-        if(i < 10)
-            return "0" + i;
-        if(i < 100)
-            return "" + i;
-        return "" + (i % 100);
     }
 }

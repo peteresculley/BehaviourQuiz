@@ -41,5 +41,5 @@ class QuizQuestion {
     public String correctAnswer;
     public String question;
     public String explanation;
-    public int order;
+    public String imageFilename;
 }
